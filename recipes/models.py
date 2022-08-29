@@ -44,11 +44,15 @@ class Ingredient(models.Model):
         on_delete=models.PROTECT,
     )
 
-    def __str__(self):
-        return self.recipe
+
+class Step(models.Model):
+    recipe = models.ForeignKey(
+        "Recipe",
+        related_name="steps",
+        on_delete=models.CASCADE,
+    )
+    order = models.IntegerField()
+    directions = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.measure
-
-    def __str__(self):
-        return self.food
+        return self.directions
